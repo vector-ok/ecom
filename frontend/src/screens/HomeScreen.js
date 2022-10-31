@@ -1,6 +1,8 @@
-import React, { useEffect, useReducer } from 'react';
+import React, { memo, useEffect, useReducer } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import { Row, Col } from 'react-bootstrap';
+import Product from '../components/Product';
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -15,12 +17,13 @@ const reducer = (state, action) => {
   }
 };
 
-function HomeScreen() {
+const HomeScreen = () => {
   const [{ loading, error, products }, dispatch] = useReducer(reducer, {
     loading: true,
     error: '',
     products: [],
   });
+
   useEffect(() => {
     const fetchData = async () => {
       dispatch({ type: 'FETCH_REQUEST' });
@@ -43,28 +46,19 @@ function HomeScreen() {
         ) : error ? (
           <div>{error}</div>
         ) : (
-          products.map((product) => {
-            return (
-              <div className="product" key={product.slug}>
-                <Link to={`/product/${product.slug}`}>
-                  <img src={product.image} alt={product.image} />
-                </Link>
-                <div className="product-info">
-                  <Link to={`/product/${product.slug}`}>
-                    <p>{product.name}</p>
-                  </Link>
-                  <p>
-                    <strong>N{product.price}</strong>
-                  </p>
-                  <button>Add to cart</button>
-                </div>
-              </div>
-            );
-          })
+          <Row>
+            {products.map((product) => {
+              return (
+                <Col sm={6} md={3} lg={3} key={product.slug}>
+                  <Product product={product} />
+                </Col>
+              );
+            })}
+          </Row>
         )}
       </div>
     </div>
   );
-}
+};
 
 export default HomeScreen;
