@@ -1,5 +1,5 @@
-import React, { memo, useEffect, useReducer } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useReducer } from 'react';
+// import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { Row, Col } from 'react-bootstrap';
 import Product from '../components/Product';

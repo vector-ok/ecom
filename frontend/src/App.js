@@ -4,7 +4,7 @@ import ProductScreen from './screens/ProductScreen';
 import { Navbar, Container } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 
-function App() {
+const App = () => {
   return (
     <BrowserRouter>
       <div className="d-flex flex-column site-container">
@@ -19,7 +19,7 @@ function App() {
           {/* <Link to="/">Ecom website</Link> */}
         </header>
         <main>
-          <Container>
+          <Container className="mt-3">
             <Routes>
               <Route path="/" element={<HomeScreen />} />
               <Route path="/product/:slug" element={<ProductScreen />} />
@@ -32,6 +32,6 @@ function App() {
       </div>
     </BrowserRouter>
   );
-}
+};
 
 export default App;
